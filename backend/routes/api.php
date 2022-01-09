@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\UserAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/register', [UserAuthController::class, 'register'])->name('register');
+Route::post('/login', [UserAuthController::class, 'login'])->name('login');
+
+
+Route::apiResource('/employee', 'EmployeeController')->middleware('auth:api');
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+
 });
